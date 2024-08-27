@@ -30,7 +30,7 @@ const server = app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
 });
 
-process.on('uncaughtException', (err) => {
+process.on('uncaughtException', (/*err*/) => {
   console.error('Uncaught Exception - shutting down server');
   //console.log(err.message);
   server.close(() => {
