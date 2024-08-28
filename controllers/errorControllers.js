@@ -1,3 +1,4 @@
+/* eslint-disable node/no-unsupported-features/es-syntax */
 const AppError = require('../utils/appError');
 
 const handleCastErrorDB = (err) => {
@@ -15,6 +16,16 @@ const handleValidationErrorDB = (err) => {
   const errors = Object.values(err.errors).map((el) => el.message);
   const message = `Invalid input data: ${errors.join('. ')}`;
   return new AppError(message, 400);
+};
+
+const handleJWTError = () => {
+  const message = 'Invalid token. Please log in again.';
+  return new AppError(message, 401);
+};
+
+const handleJWTExpiredError = () => {
+  const message = 'Token expired. Please log in again.';
+  return new AppError(message, 401);
 };
 const sendErrorDev = (err, res) => {
   res.status(err.statusCode).json({
@@ -48,12 +59,31 @@ module.exports = (err, req, res, next) => {
   if (process.env.NODE_ENV === 'development') {
     sendErrorDev(err, res);
   } else if (process.env.NODE_ENV === 'production') {
-    // eslint-disable-next-line node/no-unsupported-features/es-syntax
-    let error;
-    if (err.name === 'CastError') error = handleCastErrorDB(err);
-    if (err.code === 11000) error = handleDuplicateErrorDB(err);
-    if (err._message === 'Validation failed')
-      error = handleValidationErrorDB(err);
+    // let error;
+    // if (err.name === 'CastError') error = handleCastErrorDB(err);
+    // if (err.code === 11000) error = handleDuplicateErrorDB(err);
+    // if (err._message === 'Validation failed')
+    //   error = handleValidationErrorDB(err);
+    // if (err.name === 'JsonWebTokenError') error = handleJWTErrorDB(err);
+    let error = { ...err };
+
+    // When we deconstruct our "err" object we have not "message" property in "error"
+    // but i don't know that why we are not getting message property on "error" from above
+    //line of code
+
+    error.message = err.message; // i just add this line of code in errorController.js
+
+    if (error.name === 'CastError') {
+      error = handleCastErrorDB(error);
+    }
+    if (error.code === 11000) {
+      error = handleDuplicateErrorDB(error);
+    }
+    if (error.name === 'ValidationError') {
+      error = handleValidationErrorDB(error);
+    }
+    if (error.name === 'JsonWebTokenError') error = handleJWTError();
+    if (error.name === 'TokenExpiredError') error = handleJWTExpiredError();
     sendErrorProd(error, res);
   }
 };
