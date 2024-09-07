@@ -1,4 +1,6 @@
+/* eslint-disable import/no-extraneous-dependencies */
 const mongoose = require('mongoose');
+const slugify = require('slugify');
 //const User = require('./userModel');
 //const validator = require('validator');
 
@@ -15,6 +17,7 @@ const tourSchema = new mongoose.Schema(
       //   'Name should only contain alphabetic characters',
       // ],
     },
+    slug: String,
     duration: {
       type: Number,
       required: [true, 'A tour must have a duration'],
@@ -156,6 +159,11 @@ tourSchema.virtual('reviews', {
   localField: '_id',
   foreignField: 'tour',
   //justOne: false,
+});
+
+tourSchema.pre('save', function (next) {
+  this.slug = slugify(this.name, { lower: true });
+  next();
 });
 
 // tourSchema.pre('save', async function (next) {
