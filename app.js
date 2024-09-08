@@ -7,6 +7,7 @@ const helmet = require('helmet');
 const mongoSanitize = require('express-mongo-sanitize');
 const xss = require('xss-clean');
 const hpp = require('hpp');
+const cookieParser = require('cookie-parser');
 
 const AppError = require('./utils/appError');
 const globalErrorHandler = require('./controllers/errorControllers');
@@ -25,8 +26,67 @@ app.set('views', path.join(__dirname, 'views'));
 // Serving static files from the public directory (usually for images, CSS, JS, etc.)
 app.use(express.static(path.join(__dirname, 'public')));
 
+// Set security HTTP headers https://github.com/helmetjs/helmet
+app.use(
+  helmet({
+    crossOriginResourcePolicy: false,
+    crossOriginEmbedderPolicy: false,
+  }),
+);
+
+// Further HELMET configuration for Security Policy (CSP)
+// const scriptSrcUrls = ['https://unpkg.com/', 'https://tile.openstreetmap.org'];
+// const styleSrcUrls = [
+//   'https://unpkg.com/',
+//   'https://tile.openstreetmap.org',
+//   'https://fonts.googleapis.com/',
+// ];
+// const connectSrcUrls = ['https://unpkg.com', 'https://tile.openstreetmap.org'];
+// const fontSrcUrls = ['fonts.googleapis.com', 'fonts.gstatic.com'];
+
+// //set security http headers
+// app.use(
+//   helmet.contentSecurityPolicy({
+//     directives: {
+//       defaultSrc: ["'self'", 'https:', 'http:', 'data:', 'ws:'],
+//       connectSrc: ["'self'", ...connectSrcUrls],
+//       scriptSrc: ["'self'", ...scriptSrcUrls],
+//       styleSrc: ["'self'", "'unsafe-inline'", ...styleSrcUrls],
+//       workerSrc: ["'self'", 'blob:'],
+//       objectSrc: [],
+//       imgSrc: ["'self'", 'blob:', 'data:', 'https:'],
+//       fontSrc: ["'self'", ...fontSrcUrls],
+//     },
+//   }),
+// );
+app.use(
+  helmet({
+    contentSecurityPolicy: {
+      directives: {
+        'script-src': [
+          "'self'",
+          'https://unpkg.com/leaflet@1.9.4/dist/leaflet.js',
+          'https://cdnjs.cloudflare.com/ajax/libs/axios/1.7.7/axios.min.js', // Allow Axios
+        ],
+        'style-src': [
+          "'self'",
+          'https://*.googleapis.com',
+          'https://unpkg.com',
+          'https://cdnjs.cloudflare.com',
+        ],
+        'img-src': [
+          "'self'",
+          'data:',
+          'https://*.openstreetmap.org',
+          'https://unpkg.com',
+        ],
+      },
+    },
+  }),
+);
+
 //Set security HTTP headers
-app.use(helmet());
+// app.use(helmet());
 
 //Development logging
 if (process.env.NODE_ENV === 'development') {
@@ -43,6 +103,7 @@ app.use('/api', limiter);
 
 // Body parser, reading data from body into req.body object
 app.use(express.json({ limit: '10kb' }));
+app.use(cookieParser());
 
 //Data sanitization  against NoSQL query injection
 app.use(mongoSanitize());
@@ -66,7 +127,7 @@ app.use(
 
 app.use((req, res, next) => {
   req.requestTime = new Date().toISOString();
-  console.log(req.headers);
+  console.log(req.cookies);
   next();
 });
 
