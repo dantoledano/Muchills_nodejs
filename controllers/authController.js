@@ -87,10 +87,11 @@ exports.protect = catchAsync(async (req, res, next) => {
     req.headers.authorization.startsWith('Bearer')
   ) {
     token = req.headers.authorization.split(' ')[1];
-  } else if (req.cookies.jwt) {
+  } else if (req.cookies.jwt && req.cookies.jwt !== 'logged out') {
     token = req.cookies.jwt;
   }
   if (!token) {
+    res.redirect('/');
     return next(new AppError('You are not logged in! Please log in', 401));
   }
   //2) Token verification
@@ -109,6 +110,7 @@ exports.protect = catchAsync(async (req, res, next) => {
 
   //Grant user access
   req.user = currentUser;
+  res.locals.user = currentUser;
   next();
 });
 
