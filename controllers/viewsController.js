@@ -24,10 +24,16 @@ exports.getTour = catchAsync(async (req, res) => {
 
   //3) Render that template using tour data from 1)
 
-  res.status(200).render('tour', {
-    title: `${tour.name} Tour`,
-    tour,
-  });
+  res
+    .status(200)
+    .set(
+      'Content-Security-Policy',
+      "default-src * self blob: data: gap:; style-src * self 'unsafe-inline' blob: data: gap:; script-src * 'self' 'unsafe-eval' 'unsafe-inline' blob: data: gap:; object-src * 'self' blob: data: gap:; img-src * self 'unsafe-inline' blob: data: gap:; connect-src self * 'unsafe-inline' blob: data: gap:; frame-src * self blob: data: gap:;",
+    )
+    .render('tour', {
+      title: `${tour.name} Tour`,
+      tour,
+    });
 });
 
 exports.getLoginForm = (req, res) => {

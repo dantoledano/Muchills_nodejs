@@ -44,7 +44,7 @@ app.use(
 // const connectSrcUrls = ['https://unpkg.com', 'https://tile.openstreetmap.org'];
 // const fontSrcUrls = ['fonts.googleapis.com', 'fonts.gstatic.com'];
 
-// //set security http headers
+//set security http headers
 // app.use(
 //   helmet.contentSecurityPolicy({
 //     directives: {
@@ -67,19 +67,40 @@ app.use(
           "'self'",
           'https://unpkg.com/leaflet@1.9.4/dist/leaflet.js',
           'https://cdnjs.cloudflare.com/ajax/libs/axios/1.7.7/axios.min.js', // Allow Axios
+          'https:',
+          'http:',
+          'blob:',
+          'https://js.stripe.com',
+          'https://m.stripe.network',
+          'https://*.cloudflare.com',
         ],
         'style-src': [
           "'self'",
           'https://*.googleapis.com',
           'https://unpkg.com',
           'https://cdnjs.cloudflare.com',
+          "'unsafe-inline'",
         ],
         'img-src': [
           "'self'",
           'data:',
           'https://*.openstreetmap.org',
           'https://unpkg.com',
+          'blob:',
         ],
+        formAction: ["'self'"],
+        connectSrc: [
+          "'self'",
+          "'unsafe-inline'",
+          'data:',
+          'blob:',
+          'https://*.stripe.com',
+          'https://*.mapbox.com',
+          'https://*.cloudflare.com/',
+          'https://bundle.js:*',
+          'ws://127.0.0.1:*/',
+        ],
+        upgradeInsecureRequests: [],
       },
     },
   }),
