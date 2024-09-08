@@ -105,30 +105,30 @@ exports.protect = catchAsync(async (req, res, next) => {
 });
 
 //Only for rendered pages, no errors are returned
-// exports.isLoggedIn = catchAsync(async (req, res, next) => {
-//   if (req.cookie.jwt) {
-//     //1)verify token
-//     const decoded = await promisify(jwt.verify)(
-//       req.cookie.jwt,
-//       process.env.JWT_SECRET,
-//     );
+exports.isLoggedIn = catchAsync(async (req, res, next) => {
+  if (req.cookies.jwt) {
+    //1)verify token
+    const decoded = await promisify(jwt.verify)(
+      req.cookies.jwt,
+      process.env.JWT_SECRET,
+    );
 
-//     //2) Check if user still exists
-//     const currentUser = await User.findById(decoded.id);
-//     if (!currentUser) {
-//       return next();
-//     }
-//     //4) Check if user changed password after the JWT was generated
-//     if (currentUser.changedPasswordAfter(decoded.iat)) {
-//       return next();
-//     }
+    //2) Check if user still exists
+    const currentUser = await User.findById(decoded.id);
+    if (!currentUser) {
+      return next();
+    }
+    //3) Check if user changed password after the JWT was generated
+    if (currentUser.changedPasswordAfter(decoded.iat)) {
+      return next();
+    }
 
-//     //User is logged in
-//     res.locals.user = currentUser;
-//     return next();
-//   }
-//   next();
-// });
+    //User is logged in
+    res.locals.user = currentUser;
+    //return next();
+  }
+  next();
+});
 
 exports.restrictTo = (...roles) => {
   //roles is an array
