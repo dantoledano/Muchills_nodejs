@@ -54,6 +54,12 @@ exports.getAccount = (req, res) => {
   res.status(200).render('account', { title: 'Your Account' });
 };
 
+exports.getSignUpForm = (req, res) => {
+  res.status(200).render('signup', {
+    title: `Create New Account`,
+  });
+};
+
 exports.getMyTours = catchAsync(async (req, res, next) => {
   //1)find all bookings
   const bookings = await Bookings.find({ user: req.user.id });
