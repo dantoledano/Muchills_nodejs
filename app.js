@@ -14,6 +14,7 @@ const globalErrorHandler = require('./controllers/errorControllers');
 const tourRouter = require('./routes/tourRoutes');
 const userRouter = require('./routes/userRoutes');
 const reviewRouter = require('./routes/reviewRoutes');
+const bookingRouter = require('./routes/bookingRoutes');
 const viewRouter = require('./routes/viewRoutes');
 
 const app = express();
@@ -63,6 +64,11 @@ app.use(
   helmet({
     contentSecurityPolicy: {
       directives: {
+        'default-src': [
+          "'self'",
+          'https://js.stripe.com/v3/',
+          'https://cdnjs.cloudflare.com',
+        ],
         'script-src': [
           "'self'",
           'https://unpkg.com/leaflet@1.9.4/dist/leaflet.js',
@@ -73,6 +79,7 @@ app.use(
           'https://js.stripe.com',
           'https://m.stripe.network',
           'https://*.cloudflare.com',
+          ,
         ],
         'style-src': [
           "'self'",
@@ -88,16 +95,18 @@ app.use(
           'https://unpkg.com',
           'blob:',
         ],
+        frameSrc: ["'self'", 'https://js.stripe.com'],
         formAction: ["'self'"],
         connectSrc: [
           "'self'",
           "'unsafe-inline'",
           'data:',
           'blob:',
+          'https://bundle.js:*',
           'https://*.stripe.com',
           'https://*.mapbox.com',
           'https://*.cloudflare.com/',
-          'https://bundle.js:*',
+          'https://api.stripe.com/',
           'ws://127.0.0.1:*/',
         ],
         upgradeInsecureRequests: [],
@@ -158,6 +167,7 @@ app.use('/', viewRouter);
 app.use('/api/v1/tours', tourRouter);
 app.use('/api/v1/users', userRouter);
 app.use('/api/v1/reviews', reviewRouter);
+app.use('/api/v1/bookings', bookingRouter);
 
 app.all('*', (req, res, next) => {
   next(new AppError(`Can't find ${req.originalUrl} on this server`, 404));
