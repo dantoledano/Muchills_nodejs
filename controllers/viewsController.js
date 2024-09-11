@@ -3,7 +3,6 @@ const catchAsync = require('../utils/catchAsync');
 const AppError = require('../utils/appError');
 const User = require('../models/userModel');
 const Bookings = require('../models/bookingModel');
-const Booking = require('../models/bookingModel');
 
 exports.getOverview = catchAsync(async (req, res, next) => {
   //1) Get tour data from collection
@@ -30,7 +29,10 @@ exports.getTour = catchAsync(async (req, res, next) => {
     );
   }
 
-  //2)Build template
+  const booking = await Bookings.findOne({ tour: tour });
+
+  //const booked = booking ? true : false;
+  const booked = true;
 
   //3) Render that template using tour data from 1)
 

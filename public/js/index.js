@@ -5,6 +5,8 @@ import { login, logout } from './login';
 import { updateSettings } from './updateSettings';
 import { bookTour } from './stripe';
 import { signup } from './signup';
+//import { review } from './review';
+import { leaveReview } from './reviews';
 
 //Dom elements
 const mapBox = document.getElementById('map');
@@ -14,6 +16,8 @@ const userDataForm = document.querySelector('.form-user-data');
 const userPasswordForm = document.querySelector('.form-user-password');
 const bookBtn = document.getElementById('book-tour');
 const signupForm = document.querySelector('.form--signup');
+const reviewForm = document.querySelector('.form--review');
+
 //Delegation
 if (mapBox) {
   const locations = JSON.parse(mapBox.dataset.locations);
@@ -81,5 +85,21 @@ if (signupForm) {
     const password = document.getElementById('password').value;
     const confirmPassword = document.getElementById('password-confirm').value;
     signup(name, email, password, confirmPassword);
+  });
+}
+
+if (reviewForm) {
+  console.log('reviewForm');
+  reviewForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    document.querySelector('.btn--submit-review').textContent = 'Submitting...';
+    const rating = document.getElementById('rating').value;
+    const review = document.getElementById('comment').value;
+    const tour = e.target.dataset;
+    leaveReview(review, rating, user, tour);
+
+    //document.querySelector('.btn--submit-review').textContent = 'Submit Review';
+    document.getElementById('rating').value = '';
+    document.getElementById('comment').value = '';
   });
 }

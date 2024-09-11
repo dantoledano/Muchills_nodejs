@@ -461,9 +461,11 @@ body {
   -ms-flex-pack: center;
   justify-content: center;
 }
+
 .overview-box__group:not(:last-child) {
   margin-bottom: 7rem;
 }
+
 .overview-box__detail {
   font-size: 1.5rem;
   display: -webkit-box;
@@ -493,6 +495,7 @@ body {
 }
 .overview-box__text {
   text-transform: capitalize;
+  width: 10rem;
 }
 .overview-box__img {
   border-radius: 50%;
@@ -608,6 +611,15 @@ body {
   -ms-scroll-snap-type: x mandatory;
   scroll-snap-type: x mandatory;
 }
+
+.reviews::-webkit-scrollbar {
+  height: 10px; /* Height of scrollbar */
+}
+
+.reviews::-webkit-scrollbar-thumb {
+  background-color: rgba(255, 255, 255, 0.936); /* Scrollbar color */
+  border-radius: 10px;
+}
 .reviews__card {
   width: 30rem;
   padding: 4rem;
@@ -627,6 +639,7 @@ body {
   -ms-flex-align: center;
   align-items: center;
 }
+
 .reviews:before,
 .reviews:after {
   content: '';
@@ -1252,6 +1265,7 @@ body {
   /* Pseudo element (a visible thing that isn't really in the DOM).
       Also needs -ms- */
 }
+
 .form__input:focus {
   outline: none;
   border-bottom: 3px solid #55c57a;
@@ -1261,6 +1275,10 @@ body {
 }
 .form__input::-webkit-input-placeholder {
   color: #bbb;
+}
+
+.addReview {
+  margin-bottom: 2rem;
 }
 
 .form__group:not(:last-child) {

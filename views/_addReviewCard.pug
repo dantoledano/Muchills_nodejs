@@ -1,0 +1,12 @@
+mixin addReviewCard
+    .reviews__card
+        h6.reviews__user  Add your review
+        form.form.review--form
+                    .formGroup
+                        .label.form__label(for="review") Review
+                        input#review.form__input.addReview(type="text",placeholder='For Tour Purchasers', required)
+                    .formGroup
+                        .label.form__label(for="rating") Rating
+                        input#rating.form__input.addReview(type="number", placeholder='1-5' ,max='5', min='1' ,required)
+                    .formGroup 
+                        button.btn.btn--green Submit Review
