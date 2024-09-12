@@ -1,8 +1,11 @@
 import axios from 'axios';
 import { showAlert } from './alerts';
+const AppError = require('../../utils/appError');
 
 export const leaveReview = async (review, rating, tour) => {
-  console.log('Leave review');
+  // if (!booked) {
+  //   return new AppError('You must to book this tour to leave a review.', 403);
+  // }
   try {
     const res = await axios({
       method: 'POST',

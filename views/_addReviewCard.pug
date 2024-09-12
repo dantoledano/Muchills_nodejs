@@ -1,7 +1,7 @@
 mixin addReviewCard
     .reviews__card
         h6.reviews__user  Add your review
-        form.form.review--form
+        form.form.review--form(data-tour-id=tourId)
                     .formGroup
                         .label.form__label(for="review") Review
                         input#review.form__input.addReview(type="text",placeholder='For Tour Purchasers', required)

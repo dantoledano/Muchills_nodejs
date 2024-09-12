@@ -16,7 +16,7 @@ const userDataForm = document.querySelector('.form-user-data');
 const userPasswordForm = document.querySelector('.form-user-password');
 const bookBtn = document.getElementById('book-tour');
 const signupForm = document.querySelector('.form--signup');
-const reviewForm = document.querySelector('.form--review');
+const reviewForm = document.querySelector('form.review--form');
 
 //Delegation
 if (mapBox) {
@@ -89,17 +89,46 @@ if (signupForm) {
 }
 
 if (reviewForm) {
-  console.log('reviewForm');
   reviewForm.addEventListener('submit', async (e) => {
+    const { tourId } = e.target.dataset;
     e.preventDefault();
-    document.querySelector('.btn--submit-review').textContent = 'Submitting...';
+    document.querySelector('.btn--green').textContent = 'Submitting...';
     const rating = document.getElementById('rating').value;
-    const review = document.getElementById('comment').value;
-    const tour = e.target.dataset;
-    leaveReview(review, rating, user, tour);
+    const review = document.getElementById('review').value;
+    await leaveReview(review, rating, tourId);
 
     //document.querySelector('.btn--submit-review').textContent = 'Submit Review';
     document.getElementById('rating').value = '';
-    document.getElementById('comment').value = '';
+    document.getElementById('review').value = '';
   });
 }
+
+document.addEventListener('DOMContentLoaded', () => {
+  const reviewCondition = document.querySelector('.review__condition');
+
+  if (reviewCondition) {
+    console.log('Review condition element found:', reviewCondition);
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          console.log('Entry:', entry);
+          console.log('Is intersecting:', entry.isIntersecting);
+
+          if (entry.isIntersecting) {
+            console.log('Adding show class');
+            reviewCondition.classList.add('show');
+          }
+        });
+      },
+      {
+        threshold: 0.1, // Adjust as needed
+      },
+    );
+
+    observer.observe(reviewCondition);
+    console.log('Observer set up');
+  } else {
+    console.log('Review condition element not found');
+  }
+});

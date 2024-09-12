@@ -226,7 +226,7 @@ body {
 
 .btn:focus {
   outline: none;
-  background-color: #4c75dd;
+  background-color: rgba(110, 178, 223, 0.5);
 }
 
 .btn--white {
@@ -615,6 +615,39 @@ body {
     100% calc(100% - var(--section-rotate)),
     0 100%
   );
+}
+
+@keyframes alarm {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1); /* Grow slightly */
+  }
+  100% {
+    transform: scale(1); /* Return to original size */
+  }
+}
+
+.review__condition {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  font-size: 2rem;
+  font-weight: bold;
+  color: whitesmoke;
+  text-transform: uppercase;
+  opacity: 0; /* Start hidden */
+  transition:
+    opacity 1.2s ease-out,
+    text-shadow 0.5s ease-out;
+  text-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.review__condition.show {
+  opacity: 1; /* Fade in when .show class is added */
+  text-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+  animation: alarm 1s ease-out 0s 3;
 }
 
 .reviews {

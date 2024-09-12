@@ -10,7 +10,6 @@ const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 exports.getCheckoutSession = catchAsync(async (req, res, next) => {
   //1) Get the currently booked tour
   const tour = await Tour.findById(req.params.tourId);
-  console.log(tour);
 
   //2) Create checkout session
   //   const session = await stripe.checkout.sessions.create({
@@ -46,7 +45,8 @@ exports.getCheckoutSession = catchAsync(async (req, res, next) => {
           currency: 'usd',
           product_data: {
             name: `${tour.name} Tour`,
-            images: [`https://www.natours.dev/img/tours/${tour.imageCover}`],
+            //http://127.0.0.1:3000/img/tours/tour-66e1a3db15ce1d83048b2435-1726063855439-cover.jpeg
+            //images: [`https://www.muchills.dev/img/tours/${tour.imageCover}`],
             description: tour.summary,
           },
         },

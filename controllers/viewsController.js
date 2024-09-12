@@ -29,10 +29,12 @@ exports.getTour = catchAsync(async (req, res, next) => {
     );
   }
 
-  const booking = await Bookings.findOne({ tour: tour });
+  const booking = await Bookings.find({
+    user: res.locals.user,
+    tour: tour,
+  });
 
-  //const booked = booking ? true : false;
-  const booked = true;
+  const booked = booking.length > 0 ? true : false;
 
   //3) Render that template using tour data from 1)
 
@@ -45,6 +47,8 @@ exports.getTour = catchAsync(async (req, res, next) => {
     .render('tour', {
       title: `${tour.name} Tour`,
       tour,
+      tourId: tour._id.toString(),
+      booked,
     });
 });
 
