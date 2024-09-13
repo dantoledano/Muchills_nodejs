@@ -78,13 +78,13 @@ block content
         #map(data-locations=`${JSON.stringify(tour.locations)}`)
 
     section.section-reviews
-        if user && !booked
+        if user && !booked 
                 p.review__condition Book this tour to leave a review!
         .reviews
             if user && booked  
                 +addReviewCard 
             each review in tour.reviews
-                +reviewCard(review)
+                +reviewCard(review, showTourName)
                                 
     section.section-cta
         .cta

@@ -3,6 +3,7 @@ const catchAsync = require('../utils/catchAsync');
 const AppError = require('../utils/appError');
 const User = require('../models/userModel');
 const Bookings = require('../models/bookingModel');
+const Reviews = require('../models/reviewModel');
 
 exports.getOverview = catchAsync(async (req, res, next) => {
   //1) Get tour data from collection
@@ -74,6 +75,19 @@ exports.getMyTours = catchAsync(async (req, res, next) => {
   const tours = await Tour.find({ _id: { $in: tourIDs } });
 
   res.status(200).render('overview', { title: 'My Tours', tours });
+});
+
+exports.getMyReviews = catchAsync(async (req, res, next) => {
+  // 1) Find all reviews made by the logged-in user
+  const reviews = await Reviews.find({ user: req.user.id });
+  //console.log(reviews);
+  const showTourName = req.originalUrl.includes('/my-reviews');
+  // 2) Render the review cards view
+  res.status(200).render('MyReviews', {
+    title: 'My Reviews',
+    reviews, // Pass the reviews to render review cards
+    showTourName, // Show tour name if the URL includes '/my-reviews'
+  });
 });
 
 exports.updateUserData = catchAsync(async (req, res, next) => {

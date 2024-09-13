@@ -104,31 +104,46 @@ if (reviewForm) {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-  const reviewCondition = document.querySelector('.review__condition');
+  // Check if the current page URL matches the specific pattern
+  const isTourPage = window.location.pathname.includes('/tour/');
 
-  if (reviewCondition) {
-    console.log('Review condition element found:', reviewCondition);
+  if (isTourPage) {
+    const reviewCondition = document.querySelector('.review__condition');
+    const heading = document.querySelector('.heading-primary');
 
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          console.log('Entry:', entry);
-          console.log('Is intersecting:', entry.isIntersecting);
+    // Check if reviewCondition exists and is an Element
+    if (reviewCondition && reviewCondition instanceof Element) {
+      const reviewObserver = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              reviewCondition.classList.add('show');
+            }
+          });
+        },
+        {
+          threshold: 0.1, // Adjust as needed
+        },
+      );
 
-          if (entry.isIntersecting) {
-            console.log('Adding show class');
-            reviewCondition.classList.add('show');
-          }
-        });
-      },
-      {
-        threshold: 0.1, // Adjust as needed
-      },
-    );
+      reviewObserver.observe(reviewCondition);
+    }
+    // Check if heading exists and is an Element
+    if (heading && heading instanceof Element) {
+      const headingObserver = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              heading.classList.add('pop');
+            } else {
+              heading.classList.remove('pop');
+            }
+          });
+        },
+        { threshold: 0.1 },
+      );
 
-    observer.observe(reviewCondition);
-    console.log('Observer set up');
-  } else {
-    console.log('Review condition element not found');
+      headingObserver.observe(heading);
+    }
   }
 });
