@@ -38,3 +38,10 @@ process.on('uncaughtException', (/*err*/) => {
     process.exit(1);
   });
 });
+
+process.on('SIGTERM', () => {
+  console.log('SIGTERM received - shutting down server');
+  server.close(() => {
+    console.log('Server is closed');
+  });
+});
