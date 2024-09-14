@@ -1256,7 +1256,7 @@ body {
     var(--background-color-light),
     var(--background-color-dark)
   );
-  opacity: 0.55;
+  opacity: 0.4;
 }
 .card__picture-img {
   -o-object-fit: cover;

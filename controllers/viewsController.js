@@ -80,7 +80,6 @@ exports.getMyTours = catchAsync(async (req, res, next) => {
 exports.getMyReviews = catchAsync(async (req, res, next) => {
   // 1) Find all reviews made by the logged-in user
   const reviews = await Reviews.find({ user: req.user.id });
-  //console.log(reviews);
   const showTourName = req.originalUrl.includes('/my-reviews');
   // 2) Render the review cards view
   res.status(200).render('MyReviews', {
