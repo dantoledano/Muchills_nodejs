@@ -82,7 +82,7 @@ exports.getMyReviews = catchAsync(async (req, res, next) => {
   const reviews = await Reviews.find({ user: req.user.id });
   const showTourName = req.originalUrl.includes('/my-reviews');
   // 2) Render the review cards view
-  res.status(200).render('MyReviews', {
+  res.status(200).render('myReviews', {
     title: 'My Reviews',
     reviews, // Pass the reviews to render review cards
     showTourName, // Show tour name if the URL includes '/my-reviews'
