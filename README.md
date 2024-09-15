@@ -6,8 +6,8 @@ Muchills is a full-featured web application built using Node.js, Express, MongoD
 
 ## Live Demo 🌐
 
-- Check out the live app: [Visit Muchills](https://muchills.onrender.com)
-- **Note:** First load may take up to a minute due to free hosting. ⏳
+- **Note:** First load may take up to a minute due to free hosting. ⏳🥳
+- Check out the live app: [Muchills](https://muchills.onrender.com)
 
 ## Key Features 📝
 
