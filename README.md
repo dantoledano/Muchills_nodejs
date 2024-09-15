@@ -4,6 +4,11 @@
 
 Muchills is a full-featured web application built using Node.js, Express, MongoDB, and various npm packages. It offers a seamless experience for users to explore, book, and review exciting tours around the world. 
 
+## Live Demo 🌐
+
+Check out the live app: muchills.onrender.com
+**Note:** First load may take up to a minute due to free hosting. ⏳
+
 ## Key Features 📝
 
 ### 1. Authentication & Authorization: 🔒
