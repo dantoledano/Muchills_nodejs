@@ -47,7 +47,7 @@ Muchills is a full-featured web application built using Node.js, Express, MongoD
    - Write reviews for tours they have booked.
 - Admin privileges:
    - Can delete any user review.
--Public visibility: All users can view reviews for each tour.
+- Public visibility: All users can view reviews for each tour.
 
 
 ### 5. User Profile 👤
@@ -82,4 +82,24 @@ Muchills is a full-featured web application built using Node.js, Express, MongoD
 ![127 0 0 1_3000_tour_the-huayhuash (2)](https://github.com/user-attachments/assets/322fa342-781a-4bc7-898a-3a6ddfa2304a)
 ![127 0 0 1_3000_my-reviews](https://github.com/user-attachments/assets/2f4e880d-c8ac-40ea-b26e-6b2f65d5e206)
 ![checkout stripe com_c_pay_cs_test_a1ZpW2auYDhPkernJ3CDsHVYxMoEQFUbv6N0GOL9j29rrkPWE2dfgn67HA (2)](https://github.com/user-attachments/assets/6776bba5-ca07-491c-9a59-fb33741e97ff)
+
+## How to Use
+- Clone the repository
+- Install dependencies:
+   - npm install
+- Set up environment variables: Create a .env file and contant me for details
+  
+- Run the application:
+   - npm start
+- Access the app at http://localhost:3000.
+
+## Booking a Tour
+
+- Login or Sign up.
+- Browse available tours and select one.
+- Proceed to checkout and use the following test card details:
+- Card Number: 4242 4242 4242 4242
+- Expiry Date: Any future date
+- CVV: Any 3 digits
+
   
