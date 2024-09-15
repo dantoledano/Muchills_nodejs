@@ -59,6 +59,16 @@ Muchills is a full-featured web application built using Node.js, Express, MongoD
    - Password
 - Access all bookings and manage user settings.
 
+ ## Booking a Tour
+
+- Login or Sign up.
+- Browse available tours and select one.
+- Proceed to checkout and use the following test card details:
+- Card Number: 4242 4242 4242 4242
+- Expiry Date: Any future date
+- CVV: Any 3 digits
+
+
 
 ## Technologies and Tools 📦💻
 
@@ -87,19 +97,10 @@ Muchills is a full-featured web application built using Node.js, Express, MongoD
 - Clone the repository
 - Install dependencies:
    - npm install
-- Set up environment variables: Create a .env file and contant me for details
+- Set up environment variables: Create a .env file. Contact me for configuration details 😎
   
 - Run the application:
    - npm start
 - Access the app at http://localhost:3000.
-
-## Booking a Tour
-
-- Login or Sign up.
-- Browse available tours and select one.
-- Proceed to checkout and use the following test card details:
-- Card Number: 4242 4242 4242 4242
-- Expiry Date: Any future date
-- CVV: Any 3 digits
 
   
