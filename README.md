@@ -13,14 +13,16 @@ Muchills is a full-featured web application built using Node.js, Express, MongoD
   - New users are assigned the Regular User role by default.
   - Admins and Lead Guides have extended privileges for tour and booking management.
 
+
 2. Tour Management
    
--Admins and Lead Guides can:
+- Admins and Lead Guides can:
   - Create new tours.
   - Update or delete existing tours.
 - All users can:
   - View detailed tour information.
   - Check tour locations on interactive maps.
+    
 
 3. Booking System
    
@@ -28,10 +30,11 @@ Muchills is a full-featured web application built using Node.js, Express, MongoD
    - Book tours after logging in.
    - Manage bookings from the user profile page.
    - View and manage their previous bookings.
--Admin and Lead Guide capabilities:
+- Admin and Lead Guide capabilities:
    - View, edit, and delete bookings.
    - Manually create bookings without payment.
 - Secure Payments: Integrated with Stripe for seamless credit card payments.
+  
 
 4. Review System
    
@@ -41,14 +44,15 @@ Muchills is a full-featured web application built using Node.js, Express, MongoD
    - Can delete any user review.
 -Public visibility: All users can view reviews for each tour.
 
+
 5. User Profile
 
--Users can update:
+- Users can update:
    - Username
    - Profile picture
    - Email address
    - Password
--Access all bookings and manage user settings.
+- Access all bookings and manage user settings.
 
 
 ## Technologies and Tools 📦
