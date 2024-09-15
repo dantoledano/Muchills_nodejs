@@ -14,9 +14,9 @@ module.exports = class Email {
 
   newTransport() {
     if (process.env.NODE_ENV === 'production') {
-      return nodemailer.createTransport(
-        new brevoTransport({ apiKey: process.env.BREVO_API_KEY }),
-      );
+      // return nodemailer.createTransport(
+      //   new brevoTransport({ apiKey: process.env.BREVO_API_KEY }),
+      // );
     }
     return nodemailer.createTransport({
       host: process.env.EMAIL_HOST,
