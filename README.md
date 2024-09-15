@@ -1,6 +1,6 @@
 # Muchills  
 
-## Overview
+## Muchila.  Hills.  Chills.
 
 Muchills is a full-featured web application built using Node.js, Express, MongoDB, and various npm packages. It offers a seamless experience for users to explore, book, and review exciting tours around the world. 
 
