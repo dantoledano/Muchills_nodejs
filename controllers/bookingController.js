@@ -26,8 +26,9 @@ exports.getCheckoutSession = catchAsync(async (req, res, next) => {
           currency: 'usd',
           product_data: {
             name: `${tour.name} Tour`,
-            //http://127.0.0.1:3000/img/tours/tour-66e1a3db15ce1d83048b2435-1726063855439-cover.jpeg
-            //images: [`https://www.muchills.dev/img/tours/${tour.imageCover}`],
+            images: [
+              `https://muchills.onrender.com/img/tours/${tour.imageCover}`,
+            ],
             description: tour.summary,
           },
         },
