@@ -66,3 +66,6 @@ Muchills is a full-featured web application built using Node.js, Express, MongoD
 - JWT (JSON Web Token): Secure user authentication.
 - Nodemailer: Email notifications and password resets.
 - Parcel: Asset bundler for frontend development.
+
+
+  ![checkout stripe com_c_pay_cs_test_a1ZpW2auYDhPkernJ3CDsHVYxMoEQFUbv6N0GOL9j29rrkPWE2dfgn67HA (2)](https://github.com/user-attachments/assets/6776bba5-ca07-491c-9a59-fb33741e97ff)
