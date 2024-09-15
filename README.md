@@ -68,4 +68,13 @@ Muchills is a full-featured web application built using Node.js, Express, MongoD
 - Parcel: Asset bundler for frontend development.
 
 
-  ![checkout stripe com_c_pay_cs_test_a1ZpW2auYDhPkernJ3CDsHVYxMoEQFUbv6N0GOL9j29rrkPWE2dfgn67HA (2)](https://github.com/user-attachments/assets/6776bba5-ca07-491c-9a59-fb33741e97ff)
+## Demo 🖼️
+  
+  
+![127 0 0 1_3000_](https://github.com/user-attachments/assets/ae48b485-98d0-4c7b-ba43-4c7454a97b60)
+![127 0 0 1_3000_signup](https://github.com/user-attachments/assets/61db0b26-d82a-41bb-b95f-1a2cf73229af)
+![127 0 0 1_3000_me](https://github.com/user-attachments/assets/9559657f-6383-483e-b743-02de561dd0ea)
+[127.0.0.1_3000_tour_the-huayhuash.zip](https://github.com/user-attachments/files/17006150/127.0.0.1_3000_tour_the-huayhuash.zip)
+![127 0 0 1_3000_my-reviews](https://github.com/user-attachments/assets/2f4e880d-c8ac-40ea-b26e-6b2f65d5e206)
+![checkout stripe com_c_pay_cs_test_a1ZpW2auYDhPkernJ3CDsHVYxMoEQFUbv6N0GOL9j29rrkPWE2dfgn67HA (2)](https://github.com/user-attachments/assets/6776bba5-ca07-491c-9a59-fb33741e97ff)
+  
