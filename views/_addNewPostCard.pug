@@ -1,0 +1,13 @@
+mixin addNewPostCard 
+    section.add-post
+        h2 Add a New Post
+        form#addPostForm.add-post-formform__input(method="POST" action="/api/v1/posts")
+            div.form-group
+                label(for="postText")
+                textarea#postText.form__input(name="text" placeholder="Write your post here..." required)
+
+            div.form-group
+                input#postImages.form__upload(type="file" name="images" accept="image/*" multiple)
+                label(for="postImages") Choose Images
+
+            button.btn-submit(type="submit") Submit Post

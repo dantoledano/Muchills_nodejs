@@ -7,6 +7,7 @@ import { bookTour } from './stripe';
 import { signup } from './signup';
 //import { review } from './review';
 import { leaveReview } from './reviews';
+import { leaveAComment, likePost, addPost } from './post';
 
 //Dom elements
 const mapBox = document.getElementById('map');
@@ -17,6 +18,10 @@ const userPasswordForm = document.querySelector('.form-user-password');
 const bookBtn = document.getElementById('book-tour');
 const signupForm = document.querySelector('.form--signup');
 const reviewForm = document.querySelector('form.review--form');
+const commentForms = document.querySelectorAll('.comment-form');
+const likeButtons = document.querySelectorAll('.like-button');
+const addPostForm = document.getElementById('addPostForm');
+const posts = document.querySelectorAll('.post-container');
 
 //Delegation
 if (mapBox) {
@@ -38,7 +43,6 @@ if (logoutBtn) {
 }
 
 if (userDataForm) {
-  //לבדוק את השינויים בהרצאה הבאה
   userDataForm.addEventListener('submit', (e) => {
     e.preventDefault();
     const form = new FormData();
@@ -103,7 +107,78 @@ if (reviewForm) {
   });
 }
 
+if (addPostForm) {
+  addPostForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    const content = document.getElementById('postText').value;
+    const photos = document.getElementById('postImages').files;
+
+    await addPost(content, photos);
+  });
+}
+
+const commetOnPost = () => {
+  console.log('hello!');
+  commentForms.forEach((form) => {
+    const postId = form.dataset.postId;
+    const textarea = form.querySelector('.comment-input');
+    const button = form.querySelector('.submit-comment-btn');
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const text = textarea.value.trim();
+      if (!text) {
+        return;
+      }
+      button.textContent = 'Submitting..';
+      await leaveAComment(text, postId);
+
+      textarea.value = '';
+      button.textContent = 'Comment';
+    });
+  });
+};
+
+const likeOnPost = () => {
+  likeButtons.forEach((button) => {
+    const postId = button.dataset.postId;
+    button.addEventListener('click', async () => {
+      await likePost(postId);
+    });
+  });
+};
+
+const thumbGallery = () => {
+  posts.forEach((post) => {
+    const mainPhoto = post.querySelector('.main-photo-img');
+    const thumbnails = post.querySelectorAll('.thumbnail-img');
+
+    if (thumbnails.length > 0 && mainPhoto) {
+      thumbnails.forEach((thumbnail) => {
+        thumbnail.addEventListener('click', (e) => {
+          const clickedSrc = e.target.src;
+
+          e.target.src = mainPhoto.src;
+          mainPhoto.src = clickedSrc;
+        });
+      });
+    }
+  });
+};
+
 document.addEventListener('DOMContentLoaded', () => {
+  if (commentForms) {
+    commetOnPost();
+  }
+
+  if (likeButtons) {
+    console.log('ho');
+    likeOnPost();
+  }
+
+  thumbGallery();
+
   // Check if the current page URL matches the specific pattern
   const isTourPage = window.location.pathname.includes('/tour/');
 
@@ -122,7 +197,7 @@ document.addEventListener('DOMContentLoaded', () => {
           });
         },
         {
-          threshold: 0.1, // Adjust as needed
+          threshold: 0.1,
         },
       );
 

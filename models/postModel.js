@@ -51,6 +51,13 @@ postSchema.pre(/^find/, function (next) {
   next();
 });
 
+postSchema.set('toJSON', { virtuals: true });
+postSchema.set('toObject', { virtuals: true });
+
+postSchema.virtual('formattedDate').get(function () {
+  return this.createdAt.toLocaleDateString('en-GB'); // Formats as DD/MM/YYYY
+});
+
 const Post = mongoose.model('Post', postSchema);
 
 module.exports = Post;

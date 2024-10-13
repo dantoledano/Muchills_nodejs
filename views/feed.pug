@@ -1,0 +1,10 @@
+extends base
+include _postCard
+include _addNewPostCard
+
+block content 
+    maim.main 
+        +addNewPostCard 
+        each post in posts 
+            +postCard(post)
+        

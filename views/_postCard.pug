@@ -1,0 +1,52 @@
+mixin postCard(post)
+    .post
+        .post-header
+            img.profile-pic(src=`/img/users/${post.user.photo}`, alt=`${post.user.name}`)
+            .user-info
+                h3.user-name= post.user.name
+                p.post-date= post.formattedDate
+
+        //- .post-content
+        //-     p= post.text
+        //-     each photo in post.photos
+        //-         .post-photos
+        //-             img(src=`/img/posts/${photo}` alt="Post Photo")
+        .post-container
+            .post-text
+                p= post.text
+
+            if post.photos.length > 1
+                .post-images
+                    img.main-photo-img(src=`/img/posts/${post.photos[0]}` alt="Main Photo")
+                    .thumbnails
+                        each photo, index in post.photos.slice(1)
+                            img.thumbnail-img(src=`/img/posts/${photo}` alt=`Thumbnail ${index + 1}`)
+
+            else if post.photos.length === 1
+                .post-images
+                    img.single-photo-img(src=`/img/posts/${post.photos[0]}` alt="Single Photo")
+
+
+        .post-actions
+            .likes-section
+                button.like-button(data-post-id=post._id)
+                    svg.heading-box__icon
+                        use(xlink:href='/img/icons.svg#icon-thumbs-up')
+                span.likes-count= post.likes.length 
+
+        .comments-section
+            each comment in post.comments
+                .comment
+                    img.nav__user-img(src=`/img/users/${comment.user.photo}`, alt=`${comment.user.name}`)
+                    .comment-info
+                        h4.comment-user-name= comment.user.name
+                        p.comment-text= comment.text
+
+            .add-comment
+                form.comment-form(data-post-id=post._id)
+                    textarea.comment-input.form__input(name="commentText", placeholder="Add a comment..." required)
+                    button.submit-comment-btn(type="submit") Comment           
+
+            //- .add-comment
+            //-     textarea.comment-input(placeholder="Add a comment...")
+            //-     button.submit-comment-btn Comment

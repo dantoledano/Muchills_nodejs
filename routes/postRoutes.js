@@ -10,7 +10,12 @@ router.use(authController.protect);
 router
   .route('/')
   .get(postController.getAllPosts)
-  .post(postController.setTourUserIds, postController.createPost);
+  .post(
+    postController.uploadPostImages,
+    postController.resizePostImages,
+    postController.setTourUserIds,
+    postController.createPost,
+  );
 
 router.route('/:postId/like').patch(postController.likePost);
 

@@ -4,11 +4,11 @@ const AppError = require('../utils/appError');
 const User = require('../models/userModel');
 const Bookings = require('../models/bookingModel');
 const Reviews = require('../models/reviewModel');
+const Posts = require('../models/postModel');
 
 exports.getOverview = catchAsync(async (req, res, next) => {
   //1) Get tour data from collection
   const tours = await Tour.find();
-  //2) Build template
 
   //3) Render that template using tour data from 1)
   res.status(200).render('overview', {
@@ -101,4 +101,14 @@ exports.updateUserData = catchAsync(async (req, res, next) => {
   res
     .status(200)
     .render('account', { title: 'Your Account', user: UpdatedUser });
+});
+
+exports.getFeed = catchAsync(async (req, res, next) => {
+  //1) Get tour data from collection
+  const posts = await Posts.find();
+  //2) Render that template using tour data from 1)
+  res.status(200).render('feed', {
+    title: 'Feed',
+    posts,
+  });
 });
