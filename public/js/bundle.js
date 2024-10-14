@@ -7376,7 +7376,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Check if the current page URL matches the specific pattern
   const isTourPage = window.location.pathname.includes('/tour/');
-  if (isTourPage) {
+  const isPostPage = window.location.pathname.includes('/feed');
+  if (isTourPage || isPostPage) {
     const reviewCondition = document.querySelector('.review__condition');
     const heading = document.querySelector('.heading-primary');
 

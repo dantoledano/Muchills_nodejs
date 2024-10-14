@@ -105,10 +105,22 @@ exports.updateUserData = catchAsync(async (req, res, next) => {
 
 exports.getFeed = catchAsync(async (req, res, next) => {
   //1) Get tour data from collection
-  const posts = await Posts.find();
+  const posts = await Posts.find().sort({ createdAt: -1 });
   //2) Render that template using tour data from 1)
   res.status(200).render('feed', {
     title: 'Feed',
+    user: res.locals.user,
     posts,
+  });
+});
+
+exports.getMyPosts = catchAsync(async (req, res, next) => {
+  // 1) Find all posts made by the logged-in user
+  const posts = await Posts.find({ user: req.user.id });
+  // 2) Render the post cards view
+  res.status(200).render('myPosts', {
+    title: 'My Posts',
+    posts,
+    user: res.locals.user,
   });
 });

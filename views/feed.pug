@@ -4,7 +4,10 @@ include _addNewPostCard
 
 block content 
     maim.main 
-        +addNewPostCard 
+        if user
+            +addNewPostCard 
+        else 
+            p.review__condition.post-page Log in to post, comment, and like posts!
         each post in posts 
-            +postCard(post)
+            +postCard(post, user)
         

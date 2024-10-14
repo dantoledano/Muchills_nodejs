@@ -15,7 +15,7 @@ block content
                     +navItem("#", 'Settings', 'settings', true)
                     +navItem('/my-tours' ,'My Bookings', 'briefcase')
                     +navItem("/my-reviews", 'My Reviews', 'star')
-                    +navItem("#", 'Billing', 'credit-card')
+                    +navItem("/my-posts", 'My Posts', 'instagram')
                 - if(user.role === 'admin')
                     .admin-nav
                         h5.admin-nav__heading Admin
@@ -43,7 +43,7 @@ block content
                         .form__group.form__photo-upload
                             img.form__user-photo(src=`img/users/${user.photo}`, alt='User photo')
                             input.form__upload(type='file', accept='image/*', id='photo', name='photo')
-                            label(for='photo') Choose new photo
+                            label(for='photo') ⬆️ Choose new photo
                         .form__group.right
                             button.btn.btn--small.btn--green Save settings
 

@@ -1,4 +1,4 @@
-mixin postCard(post)
+mixin postCard(post, user)
     .post
         .post-header
             img.profile-pic(src=`/img/users/${post.user.photo}`, alt=`${post.user.name}`)
@@ -6,11 +6,6 @@ mixin postCard(post)
                 h3.user-name= post.user.name
                 p.post-date= post.formattedDate
 
-        //- .post-content
-        //-     p= post.text
-        //-     each photo in post.photos
-        //-         .post-photos
-        //-             img(src=`/img/posts/${photo}` alt="Post Photo")
         .post-container
             .post-text
                 p= post.text
@@ -29,9 +24,14 @@ mixin postCard(post)
 
         .post-actions
             .likes-section
-                button.like-button(data-post-id=post._id)
-                    svg.heading-box__icon
-                        use(xlink:href='/img/icons.svg#icon-thumbs-up')
+                if user
+                    button.like-button(data-post-id=post._id)
+                        svg.heading-box__icon
+                            use(xlink:href='/img/icons.svg#icon-heart')
+                else
+                    button.like-button(data-post-id=post._id, disabled=true, title="Login to like")
+                        svg.heading-box__icon
+                            use(xlink:href='/img/icons.svg#icon-heart')
                 span.likes-count= post.likes.length 
 
         .comments-section
@@ -41,12 +41,8 @@ mixin postCard(post)
                     .comment-info
                         h4.comment-user-name= comment.user.name
                         p.comment-text= comment.text
-
-            .add-comment
-                form.comment-form(data-post-id=post._id)
-                    textarea.comment-input.form__input(name="commentText", placeholder="Add a comment..." required)
-                    button.submit-comment-btn(type="submit") Comment           
-
-            //- .add-comment
-            //-     textarea.comment-input(placeholder="Add a comment...")
-            //-     button.submit-comment-btn Comment
+            if user
+                .add-comment
+                    form.comment-form(data-post-id=post._id)
+                        textarea.comment-input.form__input(name="commentText", placeholder="Add a comment..." required)
+                        button.submit-comment-btn(type="submit") Comment           

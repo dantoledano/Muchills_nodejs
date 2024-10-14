@@ -1,0 +1,8 @@
+extends base
+
+include _postCard
+
+block content
+    main.main 
+        each post in posts
+            +postCard(post, user)
