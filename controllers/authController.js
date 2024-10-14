@@ -50,8 +50,6 @@ exports.signup = catchAsync(async (req, res, next) => {
     role: req.body.role,
   });
   const url = `${req.protocol}://${req.get('host')}/me`;
-  //console.log(url);
-  //await new Email(newUser, url).sendWelcome();
   createAndSendToken(newUser, 201, res);
 });
 
@@ -67,9 +65,6 @@ exports.login = catchAsync(async (req, res, next) => {
   if (!user || !(await user.correctPassword(password, user.password))) {
     return next(new AppError('Incorrect email of password', 401));
   }
-
-  //console.log(user);
-  //if yes, generate a token and send it back
   createAndSendToken(user, 200, res);
 });
 
@@ -83,7 +78,7 @@ exports.logout = (req, res, next) => {
 
 exports.protect = catchAsync(async (req, res, next) => {
   //1) Check if token exists
-  console.log('Auth protect middleware called');
+
   let token;
   if (
     req.headers.authorization &&
@@ -184,7 +179,6 @@ exports.forgotPassword = catchAsync(async (req, res, next) => {
     user.passwordResetToken = undefined;
     user.passwordResetExpires = undefined;
     await user.save({ validateBeforeSave: false }); //IMPORTANT
-    //console.log(err);
     return next(
       new AppError('Error sending email. Please try again later', 500),
     );

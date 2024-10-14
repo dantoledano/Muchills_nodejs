@@ -24,7 +24,6 @@ const upload = multer({
 exports.uploadPostImages = upload.array('photos', 5);
 
 exports.resizePostImages = catchAsync(async (req, res, next) => {
-  console.log(req.files);
   if (!req.files) return next();
 
   req.body.photos = [];

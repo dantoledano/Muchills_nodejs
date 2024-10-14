@@ -66,7 +66,6 @@ reviewSchema.statics.calcAverageRatings = async function (tourId) {
       },
     },
   ]);
-  //console.log(stats);
   if (stats.length > 0) {
     await Tour.findByIdAndUpdate(tourId, {
       ratingsQuantity: stats[0].nRating,
@@ -79,22 +78,6 @@ reviewSchema.statics.calcAverageRatings = async function (tourId) {
     });
   }
 };
-
-// reviewSchema.post('save', function () {
-//   this.constructor.calcAverageRatings(this.tour);
-// });
-
-// //Trick to get the id in pre and sent it to post (below this function)
-// reviewSchema.pre(/^findOneAnd/, async function (next) {
-//   this.r = await this.findOne();
-//   console.log(this.r);
-//   next();
-// });
-
-// reviewSchema.post(/^findOneAnd/, async function () {
-//   //await this.findOne(); does not work here because query has already executed
-//   await this.r.constructor.calcAverageRatings(this.r.tour);
-// });
 
 reviewSchema.post(/save|^findOneAnd/, async (doc) => {
   await doc.constructor.calcAverageRatings(doc.tour);

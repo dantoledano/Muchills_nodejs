@@ -32,7 +32,6 @@ export const addPost = async (text, photos) => {
 };
 
 export const leaveAComment = async (text, postId) => {
-  console.log(text, postId);
   try {
     const res = await axios({
       method: 'POST',

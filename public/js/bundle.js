@@ -7172,7 +7172,6 @@ const addPost = async (text, photos) => {
 };
 exports.addPost = addPost;
 const leaveAComment = async (text, postId) => {
-  console.log(text, postId);
   try {
     const res = await (0, _axios.default)({
       method: 'POST',
@@ -7323,7 +7322,6 @@ if (addPostForm) {
   });
 }
 const commetOnPost = () => {
-  console.log('hello!');
   commentForms.forEach(form => {
     const postId = form.dataset.postId;
     const textarea = form.querySelector('.comment-input');
@@ -7369,7 +7367,6 @@ document.addEventListener('DOMContentLoaded', () => {
     commetOnPost();
   }
   if (likeButtons) {
-    console.log('ho');
     likeOnPost();
   }
   thumbGallery();
